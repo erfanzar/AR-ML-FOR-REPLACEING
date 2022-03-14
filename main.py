@@ -8,7 +8,7 @@ import time
 
 from Landmarkfinder import LmFinder
 
-import cvzone 
+
 
 from Resizer import Resize
 
@@ -127,9 +127,6 @@ while True:
 
 
                 # print(f"FrontRing : {type(frontRing)} , {frontRing.shape}")
-
-
-                # ffrm = cvzone.overlayPNG(frame[ws:ws+100 ,hs:hs+100,:] , frontRing)
                 
                 # except:
 
