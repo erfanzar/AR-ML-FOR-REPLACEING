@@ -6,9 +6,13 @@ import mediapipe as mp
 
 import time
 
-from Landmarkfinder import LmFinder
+from HandyFunction import LmFinder
 
-from cvzone import 
+
+from HandyFunction import overlayPNG
+
+from HandyFunction import rotateImage
+
 
 from Resizer import Resize
 
@@ -119,9 +123,12 @@ while True:
             #     print(x0 , y0)
             if 50<ws<430 and 50<hs<590:
 
+                ffr = overlayPNG(frame[ws:ws+100 ,hs:hs+100,:] ,frontRing)
                 
 
-                frame[ws:ws+100 ,hs:hs+100,:] = frontRing
+                frame[ws:ws+100 ,hs:hs+100,:] = ffr
+
+                # [ws:ws+100 ,hs:hs+100,:]
 
                 print("IN TarGEt !")
 
