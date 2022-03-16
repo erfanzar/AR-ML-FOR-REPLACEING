@@ -109,9 +109,9 @@ while True:
         drawnigga = [drawer.drawer(i,frame) for i in drw]
 
 
-        hs = x0-50
+        hs = x0-readdx
 
-        ws = y0-50
+        ws = y0-readdy
 
 
         if 150<fy8 & fy12 & fy16<450:
