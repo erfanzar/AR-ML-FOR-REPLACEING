@@ -1,5 +1,5 @@
 import cv2 as cv
- 
+
 import numpy as np
 
 import mediapipe as mp
@@ -8,13 +8,13 @@ import time
 
 from Landmarkfinder import LmFinder
 
-
+from cvzone import 
 
 from Resizer import Resize
 
 cam = cv.VideoCapture(0)
 
-frontRing = cv.imread("Front.jpg")
+frontRing = cv.imread("FRONTONE.png")
 
 
 BackSideRing = cv.imread("G.jpg" , cv.IMREAD_UNCHANGED)
@@ -97,7 +97,7 @@ while True:
         # paranoid1 = int(np.interp(y0 + 30, [y0, y0 + 50], [5, 15]))
 
         readdx = x0 - x1
-        
+
         readdy = y0 - y1
 
         drw = [drawer(i) for i in fingers]
@@ -108,30 +108,32 @@ while True:
         hs = x0-50
 
         ws = y0-50
-    
 
-        if 150<fy8 & fy12 & fy16<450: 
-            
+
+        if 150<fy8 & fy12 & fy16<450:
+
             cv.circle(frame, (x0 - readdx, y0 - readdy), 10, (255, 255, 0),1)
 
             # if x0 & y0 != 0:
             #     print("state1")
             #     print(x0 , y0)
             if 50<ws<430 and 50<hs<590:
+
                 
+
                 frame[ws:ws+100 ,hs:hs+100,:] = frontRing
-                
+
                 print("IN TarGEt !")
 
                 # print(f"frame : {type(frame[ws:ws+100 ,hs:hs+100,:])} , {frame[ws:ws+100 ,hs:hs+100].shape}")
 
 
                 # print(f"FrontRing : {type(frontRing)} , {frontRing.shape}")
-                
+
                 # except:
 
                 #     raise Exception("BRakeAt Point 2")
-        if fx20>fx12>fx4 | fy4>fy8 :
+        if fx20>fx12>fx4 and fy4>fy8 :
 
             cv.ellipse(
                 frame,
@@ -144,12 +146,12 @@ while True:
                 1)
 
             # print("Left")
-            
+
             """
                 Detection on The LEft Nigga Hands
             """
 
-        if fx20<fx12<fx4 | fy4>fy8 :
+        if fx20<fx12<fx4 and fy4>fy8 :
 
             cv.ellipse(
                 frame,
@@ -160,21 +162,24 @@ while True:
                 200,
                 (255,200,0),
                 1)
-            
+
             # print("Right")
-            
+
             """
             Detection on The Right Nigga Hands
             """
 
 
         # print(f"lmList : {lmlist}")
+
         # print(f"X,Y : {x0,y0}")
 
     cv.putText(frame, f"Fps : {fps}", (60, 60), cv.FONT_ITALIC, 1, (200, 0, 0))
 
     cv.imshow("Test", frame)
+
     cv.waitKey(1)
 
     if cv.waitKey(1) == ord("q"):
+
         break
