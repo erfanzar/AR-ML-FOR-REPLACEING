@@ -123,10 +123,21 @@ while True:
             #     print(x0 , y0)
             if 50<ws<430 and 50<hs<590:
 
-                ffr = overlayPNG(frame[ws:ws+100 ,hs:hs+100,:] ,frontRing)
-                
+                pfp = (fx16+fx12)
 
-                frame[ws:ws+100 ,hs:hs+100,:] = ffr
+                print(pfp)
+
+                intpertor = np.interp(pfp,[500,200],[100,50])                
+
+                intpertor = int(intpertor)
+
+                frontRing = Resize(frontRing,intpertor)
+
+
+                ffr = overlayPNG(frame[ws:ws+intpertor ,hs:hs+intpertor,:] ,frontRing)
+
+
+                frame[ws:ws+intpertor ,hs:hs+intpertor,:] = ffr
 
                 # [ws:ws+100 ,hs:hs+100,:]
 
