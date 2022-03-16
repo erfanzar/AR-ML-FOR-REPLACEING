@@ -80,3 +80,23 @@ def rotateImage(img, angle, scale=1):
 
 
     return img
+
+
+def calculate_rotation(a,b):
+    """ return rotation angle from vector a to vector b, in degrees.
+    Args:
+        a : np.array vector. format (x,y)
+        b : np.array vector. format (x,y)
+    Returns:
+        angle [float]: degrees. 0~360
+    """
+    unit_vector_1 = a / np.linalg.norm(a)
+    unit_vector_2 = b / np.linalg.norm(b)
+    dot_product = np.dot(unit_vector_1, unit_vector_2)
+    angle = np.arccos(dot_product)
+    angle = angle/ np.pi * 180
+    c = np.cross(b,a,axis=0)
+    if c>0:
+        angle +=180
+    
+    return angle

@@ -13,6 +13,7 @@ from HandyFunction import overlayPNG
 
 from HandyFunction import rotateImage
 
+from HandyFunction import calculate_rotation
 
 from Resizer import Resize
 
@@ -21,14 +22,14 @@ cam = cv.VideoCapture(0)
 frontRing = cv.imread("FRONTONE.png")
 
 
-BackSideRing = cv.imread("G.jpg" , cv.IMREAD_UNCHANGED)
+TOPSIDE = cv.imread("TOPSIDE.png" , cv.IMREAD_UNCHANGED)
 
-hf, wf, cf = BackSideRing.shape
+hf, wf, cf = TOPSIDE.shape
 
 
-frontRing = Resize(frontRing,100)
+# frontRing = Resize(frontRing,100)
 
-BackSideRing = Resize(BackSideRing,100)
+# TOPSIDE = Resize(TOPSIDE,100)
 
 
 handp = mp.solutions.hands
@@ -109,9 +110,9 @@ while True:
         drawnigga = [drawer.drawer(i,frame) for i in drw]
 
 
-        hs = x0-readdx
+        hs = x0-50
 
-        ws = y0-readdy
+        ws = y0-50
 
 
         if 150<fy8 & fy12 & fy16<450:
@@ -121,23 +122,23 @@ while True:
             # if x0 & y0 != 0:
             #     print("state1")
             #     print(x0 , y0)
-            if 50<ws<430 and 50<hs<590:
+            if 60<ws<430 and 60<hs<590:
 
                 pfp = (fx16+fx12)
 
                 print(pfp)
 
-                intpertor = np.interp(pfp,[500,200],[100,50])                
+                intpertor = np.interp(pfp,[1000,200],[100,70])                
 
                 intpertor = int(intpertor)
 
                 frontRing = Resize(frontRing,intpertor)
 
 
-                ffr = overlayPNG(frame[ws:ws+intpertor ,hs:hs+intpertor,:] ,frontRing)
+                ffr = overlayPNG(frame[y0-20:y0-20+intpertor ,x0-20:x0-20+intpertor,:] ,frontRing)
 
 
-                frame[ws:ws+intpertor ,hs:hs+intpertor,:] = ffr
+                frame[y0-20:y0-20+intpertor ,x0-20:x0-20+intpertor,:] = ffr
 
                 # [ws:ws+100 ,hs:hs+100,:]
 
@@ -151,7 +152,7 @@ while True:
                 # except:
 
                 #     raise Exception("BRakeAt Point 2")
-        if fx20>fx12>fx4 and fy4>fy8 :
+        elif fx20>fx12>fx4 and fy4>fy8 :
 
             cv.ellipse(
                 frame,
@@ -163,13 +164,58 @@ while True:
                 (255,200,0),
                 1)
 
-            # print("Left")
+            print("Left")
+            
+            
+            
+            
+            
+            if 60<ws<430 and 60<hs<590:
+            
+                pfp = (fx16+fx12)
+
+                print(pfp)
+
+                intpertor = np.interp(pfp,[1300,200],[100,70])                
+
+                intpertor = int(intpertor)
+
+                TOPSIDE = Resize(TOPSIDE,intpertor)
+
+
+                ffr = overlayPNG(frame[y0+30:y0+30+intpertor ,x0-50:x0-50+intpertor,:] ,TOPSIDE)
+
+
+                frame[y0+30:y0+30+intpertor ,x0-50:x0-50+intpertor,:] = ffr
+
+                # [ws:ws+100 ,hs:hs+100,:]
+
+                print("IN TarGEt !")
+                
+                
+                rotation = calculate_rotation(x0-50,fx16)
+                
+                print(rotation)
+
+
+                # print(f"frame : {type(frame[ws:ws+100 ,hs:hs+100,:])} , {frame[ws:ws+100 ,hs:hs+100].shape}")
+
+
+                # print(f"TOPSIDE : {type(TOPSIDE)} , {TOPSIDE.shape}")
+
+                # except:
+
+                #     raise Exception("BRakeAt Point 2")
+
+            print("LEft")
+
+     
 
             """
                 Detection on The LEft Nigga Hands
             """
 
-        if fx20<fx12<fx4 and fy4>fy8 :
+        elif fx20<fx12<fx4 and fy4>fy8 :
 
             cv.ellipse(
                 frame,
@@ -181,7 +227,42 @@ while True:
                 (255,200,0),
                 1)
 
-            # print("Right")
+            if 60<ws<430 and 60<hs<590:
+        
+                pfp = (fx16+fx12)
+
+                print(pfp)
+
+                intpertor = np.interp(pfp,[1300,200],[100,70])                
+
+                intpertor = int(intpertor)
+
+                TOPSIDE = Resize(TOPSIDE,intpertor)
+
+
+                ffr = overlayPNG(frame[y0+30:y0+30+intpertor ,x0-50:x0-50+intpertor,:] ,TOPSIDE)
+
+
+                frame[y0+30:y0+30+intpertor ,x0-50:x0-50+intpertor,:] = ffr
+
+                # [ws:ws+100 ,hs:hs+100,:]
+
+                print("IN TarGEt !")
+
+                # print(f"frame : {type(frame[ws:ws+100 ,hs:hs+100,:])} , {frame[ws:ws+100 ,hs:hs+100].shape}")
+
+
+                # print(f"TOPSIDE : {type(TOPSIDE)} , {TOPSIDE.shape}")
+
+                # except:
+
+                #     raise Exception("BRakeAt Point 2")
+
+                rotation = calculate_rotation(x0-50,fx16)
+                
+                print(rotation)
+
+            print("Right")
 
             """
             Detection on The Right Nigga Hands
