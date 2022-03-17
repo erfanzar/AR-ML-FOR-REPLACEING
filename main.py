@@ -1,3 +1,5 @@
+### Start of importing dependecis
+
 import cv2 as cv
 
 import numpy as np
@@ -17,12 +19,23 @@ from HandyFunction import calculate_rotation
 
 from Resizer import Resize
 
+
+### ending of importing dependecis
+
+###  change able for the each device depend on which camera u want to use
+
+
 cam = cv.VideoCapture(0)
 
-frontRing = cv.imread("FRONTONE.png")
 
 
-TOPSIDE = cv.imread("TOPSIDE.png" , cv.IMREAD_UNCHANGED)
+####  load the images from the images directory in the path
+
+
+frontRing = cv.imread("Images\FRONTONE.png", cv.IMREAD_UNCHANGED)
+
+
+TOPSIDE = cv.imread("Images\TOPSIDE.png" , cv.IMREAD_UNCHANGED)
 
 hf, wf, cf = TOPSIDE.shape
 
@@ -38,6 +51,8 @@ Hands = handp.Hands()
 
 Connections = handp.HAND_CONNECTIONS
 
+
+### drawing utils
 
 class drawer:
     def __init__(self ,lst):
@@ -283,3 +298,27 @@ while True:
     if cv.waitKey(1) == ord("q"):
 
         break
+
+
+
+# MIT License
+
+# Copyright (c) 2022 Erano-
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
