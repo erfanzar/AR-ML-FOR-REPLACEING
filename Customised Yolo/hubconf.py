@@ -1,31 +1,10 @@
-# YOLOv5 🚀 by Ultralytics, GPL-3.0 license
-"""
-PyTorch Hub models https://pytorch.org/hub/ultralytics_yolov5/
 
-Usage:
-    import torch
-    model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
-    model = torch.hub.load('ultralytics/yolov5:master', 'custom', 'path/to/yolov5s.onnx')  # file from branch
-"""
 
 import torch
 
 
 def _create(name, pretrained=True, channels=3, classes=80, autoshape=True, verbose=True, device=None):
-    """Creates or loads a YOLOv5 model
 
-    Arguments:
-        name (str): model name 'yolov5s' or path 'path/to/best.pt'
-        pretrained (bool): load pretrained weights into the model
-        channels (int): number of input channels
-        classes (int): number of model classes
-        autoshape (bool): apply YOLOv5 .autoshape() wrapper to model
-        verbose (bool): print all information to screen
-        device (str, torch.device, None): device to use for model parameters
-
-    Returns:
-        YOLOv5 model
-    """
     from pathlib import Path
 
     from models.common import AutoShape, DetectMultiBackend
