@@ -95,7 +95,7 @@ def calculate_rotation(a,b):
     dot_product = np.dot(unit_vector_1, unit_vector_2)
     angle = np.arccos(dot_product)
     angle = angle/ np.pi * 180
-    c = np.cross(b,a,axis=0)
+    c = np.cross(b,a, 1,1,1,1)
     if c>0:
         angle +=180
     

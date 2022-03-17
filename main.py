@@ -59,7 +59,7 @@ while True:
 
     ntime = time.time()
 
-    fps = 1 / (ptime - ntime)
+    fps = 1 / (ntime - ptime)
 
     ptime = ntime
 
@@ -193,9 +193,9 @@ while True:
                 print("IN TarGEt !")
                 
                 
-                rotation = calculate_rotation(x0-50,fx16)
+                # rotation = calculate_rotation(x0-50,fx16)
                 
-                print(rotation)
+                # print(rotation)
 
 
                 # print(f"frame : {type(frame[ws:ws+100 ,hs:hs+100,:])} , {frame[ws:ws+100 ,hs:hs+100].shape}")
@@ -258,9 +258,9 @@ while True:
 
                 #     raise Exception("BRakeAt Point 2")
 
-                rotation = calculate_rotation(x0-50,fx16)
+                # rotation = calculate_rotation(x0-50,fx16)
                 
-                print(rotation)
+                # print(rotation)
 
             print("Right")
 
@@ -276,7 +276,8 @@ while True:
     cv.putText(frame, f"Fps : {fps}", (60, 60), cv.FONT_ITALIC, 1, (200, 0, 0))
 
     cv.imshow("Test", frame)
-
+    
+    
     cv.waitKey(1)
 
     if cv.waitKey(1) == ord("q"):
