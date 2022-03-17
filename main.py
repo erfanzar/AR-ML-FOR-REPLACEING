@@ -12,7 +12,6 @@ from HandyFunction import LmFinder
 
 
 from HandyFunction import overlayPNG
-
 from HandyFunction import rotateImage
 
 from HandyFunction import calculate_rotation
@@ -32,10 +31,10 @@ cam = cv.VideoCapture(0)
 ####  load the images from the images directory in the path
 
 
-frontRing = cv.imread("Images\FRONTONE.png", cv.IMREAD_UNCHANGED)
+TOPSIDE = cv.imread("Images\FRONTONE.png", cv.IMREAD_UNCHANGED)
 
 
-TOPSIDE = cv.imread("Images\TOPSIDE.png" , cv.IMREAD_UNCHANGED)
+frontRing = cv.imread("Images\TOPSIDE.png" , cv.IMREAD_UNCHANGED)
 
 hf, wf, cf = TOPSIDE.shape
 
