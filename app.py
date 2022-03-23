@@ -1,42 +1,81 @@
+import cv2 as cv
+
+from main import Ai
+
 from kivy.app import App
-from kivy.uix.camera import Camera
-from kivy.uix import *
+
 from kivy.uix.button import Button
+
+from kivy.uix.image import Image
+
+from kivy.uix.label import Label
+
+from kivy.clock import Clock
+
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.widget import Widget
+
+from kivy.graphics.texture import Texture
 
 
-class BoxLayOut(BoxLayout):
-    pass
-    # def __init__(self, **kwargs):
-    #     super().__init__(**kwargs)
-    #
-    #     self.orientation = "vertical"
-    #
-    #     bu1 = Button(text="Hallo")
-    #
-    #     bu2 = Button(text="Hello")
-    #
-    #     self.add_widget(bu1)
-    #
-    #     self.add_widget(bu2)
+class Application(App):
+
+    def __init__(self, **kwargs):
+
+        super().__init__(**kwargs)
+
+        self.button = None
+
+        self.web_cam = None
+
+        self.varification = None
+
+        self.ai = None
+
+    def build(self):
+
+        screen = BoxLayout(orientation='vertical')
+
+        self.web_cam = Image(size_hint=(1,.9))
+
+        self.button = Button(text="Start" , size_hint=(1,.2))
+
+        self.varification = Label(text="NonDetected",size_hint=(1,.1))
+
+        self.ai = Ai(cameraindex=0)
+
+        screen.add_widget(self.web_cam)
+
+        screen.add_widget(self.button)
+
+        screen.add_widget(self.varification)
+
+        Clock.schedule_interval(self.update,1.0/15.0)
+
+        return screen
+
+    def update(self,*args):
+
+        frame = self.ai.forward()
+
+        _height = frame.shape[0]
+
+        _width = frame.shape[1]
+
+        _chanels = frame.shape[2]
+
+        buf = cv.flip(frame, 0).tobytes()
+
+        img_texture = Texture.create(size=(_width,_height),colorfmt='bgr')
+
+        img_texture.blit_buffer(buf,colorfmt='bgr',bufferfmt='ubyte')
+
+        self.web_cam = img_texture
 
 
-class Camerad(Camera):
-    pass
 
+if __name__ == "__main__":
 
-class MainWidget(Widget):
-    pass
-
-
-class AppScreen(App):
-    pass
-
-
-AppScreen().run()
-
-
+    Application().run()
 
 
 # MIT License
