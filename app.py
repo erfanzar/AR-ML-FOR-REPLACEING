@@ -1,6 +1,6 @@
 import cv2 as cv
 
-from main import Ai
+from RUko import Ai
 
 from kivy.app import App
 
